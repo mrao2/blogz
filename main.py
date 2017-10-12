@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
+from dateTime import datetime
 
 
 app = Flask(__name__)
@@ -8,13 +9,18 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:mohith@loc
 app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
-class Task(db.Model):
+class Blog(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120))
+    btitle = db.Column(db.String(80), nullable=False)
+    bpost = db.Column(db.Text, nullable=False)
+    pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-    def __init__(self, name):
-        self.name = name
+
+    def __init__(self, btitle, bpost, pub_date):
+        self.btitle = btitle
+        self.bpost = bpost
+        self.pub_date = pub_date
 
 tasks = []
 
@@ -25,7 +31,7 @@ def index():
         task = request.form['task']
         tasks.append(task)
 
-    return render_template('todos.html',title="Build-A-Blog!", tasks=tasks)
+    return render_template('index.html',title="Build-A-Blog!", tasks=tasks)
 
 if __name__ == '__main__':
     app.run()
