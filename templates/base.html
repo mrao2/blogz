@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+    .error {
+        color: red;
+        font-style: italic;
+    }
+    .navbar {
+        display: table;
+    }
+    .navbar ul li {
+        float: left;
+        display: block;
+        text-decoration: : none;
+        color: black @override;
+        padding: 15px;
+    }
+    .navbar ul li :hover {
+        background-color: grey;
+    }
+    .title  {
+        text-align: center;
+    }
+    </style>
+</head>
+
+<body>
+  <div id="navbar" class="navbar">
+    <ul>
+      <li>
+        <a href="blog">Main Blog Page</a>
+      </li>
+      <li>
+        <a href="new_post">Add a Blog Post</a>
+      </li>
+    </ul>
+  </div>
+
+    {% block content %} {% endblock %}
+
+</body>
+
+</html>
