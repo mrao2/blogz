@@ -1,6 +1,7 @@
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, send_file
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+
 
 
 app = Flask(__name__)
@@ -26,11 +27,15 @@ tasks = []
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    return render_template('index.html',title="Build-A-Blog!", tasks=tasks)
+    bodystring = ""
+    blogposts = Blog.query.order_by(Blog.pub_date).all()
+    return render_template('index.html',object_list=blogposts)
 
+@app.route('/new_post', methods=['POST', 'GET'])
 def new_post():
     return render_template('new_post.html',title="Build-A-Blog!")
 
+@app.route('/post', methods=['POST', 'GET'])
 def post():
 
     if request.method == 'POST':
@@ -39,12 +44,15 @@ def post():
         blog_post = Blog(title, entry)
         db.session.add(blog_post)
         db.session.commit()
+        return render_template('post.html',title=title,post_title=title,post_body=entry)
 
     if request.method == 'GET':
-        post_id = request.args.get('post_id')
-        this_post = Blog.get(post_id)
+        post_id = request.args.get('id')
+        this_post = Blog.query.get(int(post_id))
+        title = this_post.btitle
+        entry = this_post.bpost
+        return render_template('post.html',title=title,post_title=title,post_body=entry)
 
-    return render_template('post.html',title=title)
 
 
 

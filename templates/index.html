@@ -1,17 +1,16 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
 
-<div id="navbar" class="navbar">
-  <ul>
-    <li>
-      <a href="blog">Main Blog Page</a>
-    </li>
-    <li>
-      <a href="new_post">Add a Blog Post</a>
-    </li>
-  </ul>
-</div>
+{% block title %}Blog entries{% endblock %}
 
-<h1 class="title">Build a Blog</h1>
+{% block content %}
 
+{% for entry in object_list %}
+  <h3>
+    <a href="/post?id={{ entry.id }}">
+    {{ entry.btitle }}
+    </a>
+  </h3>
+  <p> {{ entry.bpost }}</p>
+{% endfor %}
 
 {% endblock %}

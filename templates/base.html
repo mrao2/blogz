@@ -5,43 +5,95 @@
     <meta charset="UTF-8">
     <title>{{ title }}</title>
     <style>
-    .error {
+    .error
+    {
         color: red;
         font-style: italic;
     }
-    .navbar {
-        display: table;
+    #Header
+    {
+      background-color: black;
+      height: 100px;
+      width: 100%;
     }
-    .navbar ul li {
-        float: left;
-        display: block;
-        text-decoration: : none;
-        color: black @override;
-        padding: 15px;
+    #headertext
+    {
+      width: 300px;
+      height: 100px;
+      float: left;
+      color:white;
     }
-    .navbar ul li :hover {
+    .container
+    {
+    width: 960px;
+    height: auto;
+    margin: 0 auto;
+    }
+
+
+    #navArea
+    {
+    height: 100px;
+    float: right;
+    display: inline;
+    }
+
+    #navArea li
+    {
+    list-style-type: none !important;
+    }
+
+    #nav a
+    {
+    color: white;
+    text-decoration: none;
+    margin-top: 30px;
+    }
+
+    #nav li
+    {
+    float: left;
+    margin-left: 30px;
+    background-color: #252525;
+    padding: 10px;
+    border: 1px solid silver;
+    border-radius: 5px;
+    }
+
+    #nav li:hover
+    {
+    background-color: grey;
+    }
+
+    body
+    {
+        font-family: arial;
         background-color: grey;
     }
-    .title  {
-        text-align: center;
+    #content
+    {
+      display: table;
     }
     </style>
 </head>
 
 <body>
-  <div id="navbar" class="navbar">
-    <ul>
-      <li>
-        <a href="blog">Main Blog Page</a>
-      </li>
-      <li>
-        <a href="new_post">Add a Blog Post</a>
-      </li>
-    </ul>
-  </div>
-
+  <div id = "Header">
+    <div class = "container">
+        <div id = "headertext">
+          <h1>Build-A-Blog</h1>
+        </div>
+        <div id = "navArea">
+            <ul id = "nav">
+              <a href = "/"><li>Home</li></a>
+              <a href = "new_post"><li>Write New Entry</li><a>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id='content'>
     {% block content %} {% endblock %}
-
+</div>
 </body>
 
 </html>
